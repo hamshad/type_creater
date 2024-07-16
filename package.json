@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "npx ts-node index.ts",
+    "dev": "ts-node index.ts",
+    "build": "npx ts-node index.ts",
     "test": "jest"
   },
   "keywords": [],
-  "author": "",
+  "author": "Hamshad Shaikh",
   "license": "ISC",
-  "description": "",
+  "description": "Converts the JSON data to type for Typescript",
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.10",
