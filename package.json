@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node index.ts",
-    "build": "npx ts-node index.ts",
+    "start": "npx ts-node index.ts",
     "test": "jest"
   },
   "keywords": [],
