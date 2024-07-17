@@ -34,7 +34,7 @@ const obj2type = (data: any, recurse_num: number = 0) => {
         : val_type === "array"
         ? arr2type(data[keys[i]], recurse_num + 1)
         : val_type
-    }\n`;
+    };\n`;
     if (Number(i) === keys.length - 1) {
       str_value += `${indent}[key: string]: any;\n${indent.slice(2)}}`;
     }
@@ -43,9 +43,13 @@ const obj2type = (data: any, recurse_num: number = 0) => {
 };
 
 const arr2type = (data: Array<any>, recurse_num: number) => {
-  return data.length > 0
-    ? obj2type(data[0], recurse_num).concat("[]")
-    : "any[]";
+  return (
+    data.length > 0
+      ? typeParser(data[0]) === "object"
+        ? obj2type(data[0], recurse_num)
+        : typeParser(data[0])
+      : "any"
+  ).concat("[];");
 };
 
 export default typeCreater;

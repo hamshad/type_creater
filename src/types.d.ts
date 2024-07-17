@@ -1,4 +1,5 @@
 export type types =
+  | "any"
   | "string"
   | "number"
   | "bigint"
