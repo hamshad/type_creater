@@ -1,18 +1,25 @@
+import colorText, { consoleColors } from "./colorText";
 import typeParser from "./typeParser";
+import { types } from "./types";
 
 const typeCreater = (data: any) => {
   try {
     var json_data = JSON.parse(data);
     return typeParser(json_data) === "object"
-      ? obj2str(json_data)
+      ? obj2type(json_data)
       : typeParser(data);
   } catch (err) {
-    console.log("[ERROR]", err);
+    if (RegExp(/[{}\[\]:]/).test(data)) {
+      console.log(
+        colorText("\n[ERROR]", consoleColors.BGred),
+        colorText("" + err, consoleColors.red)
+      );
+    }
     return typeParser(data);
   }
 };
 
-const obj2str = (data: any, recurse_num: number = 0) => {
+const obj2type = (data: any, recurse_num: number = 0) => {
   var keys: Array<string> = Object.keys(data);
   var str_value = "{\n";
   var indent = "  ";
@@ -20,15 +27,25 @@ const obj2str = (data: any, recurse_num: number = 0) => {
     indent += "  ";
   }
   for (var i in keys) {
-    var val_type = typeParser(data[keys[i]]);
+    var val_type: types = typeParser(data[keys[i]]);
     str_value += `${indent}${keys[i]}: ${
-      val_type === "object" ? obj2str(data[keys[i]], recurse_num + 1) : val_type
+      val_type === "object"
+        ? obj2type(data[keys[i]], recurse_num + 1)
+        : val_type === "array"
+        ? arr2type(data[keys[i]], recurse_num + 1)
+        : val_type
     }\n`;
     if (Number(i) === keys.length - 1) {
       str_value += `${indent}[key: string]: any;\n${indent.slice(2)}}`;
     }
   }
   return str_value;
+};
+
+const arr2type = (data: Array<any>, recurse_num: number) => {
+  return data.length > 0
+    ? obj2type(data[0], recurse_num).concat("[]")
+    : "any[]";
 };
 
 export default typeCreater;
