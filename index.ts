@@ -47,7 +47,7 @@ export const index = () => {
 };
 
 const correctJson = (invalidJson: string) => {
-  let correctedJSON = invalidJson.replace(/'([^']+)'/g, '"$1"');
+  let correctedJSON = invalidJson.replace(/'([^']+)'(?=\s*:)/g, '"$1"');
   correctedJSON = correctedJSON.replace(/(\w+):( |")/g, '"$1":$2');
   correctedJSON = correctedJSON.replace(/""/g, '"');
   // console.log(
@@ -57,7 +57,7 @@ const correctJson = (invalidJson: string) => {
   //       consoleColors.BGwhite
   //     ) +
   //     "\n" +
-  //   colorText(correctedJSON, consoleColors.yellow)
+  //     colorText(correctedJSON, consoleColors.yellow)
   // );
   return correctedJSON;
 };

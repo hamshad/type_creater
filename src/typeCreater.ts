@@ -49,7 +49,7 @@ const arr2type = (data: Array<any>, recurse_num: number) => {
         ? obj2type(data[0], recurse_num)
         : typeParser(data[0])
       : "any"
-  ).concat("[];");
+  ).concat("[]");
 };
 
 export default typeCreater;
