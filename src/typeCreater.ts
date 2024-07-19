@@ -42,6 +42,8 @@ const obj2type = (data: any, recurse_num: number = 0) => {
   return str_value;
 };
 
+// i want to get type of all objects from array
+// and replace the keys with any type to the its original type if exists
 const arr2type = (data: Array<any>, recurse_num: number) => {
   return (
     data.length > 0

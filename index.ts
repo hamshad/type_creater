@@ -1,6 +1,7 @@
 import * as readline from "readline";
-import typeCreater from "./src/typeCreater";
 import colorText, { consoleColors } from "./src/colorText";
+import jsonCorrector from "./src/jsonCorrector";
+import typeCreater from "./src/typeCreater";
 
 let rl = readline.createInterface({
   input: process.stdin,
@@ -37,29 +38,13 @@ export const index = () => {
               consoleColors.BGcyan
             ) +
             "\n" +
-            colorText(typeCreater(correctJson(answer)), consoleColors.cyan) +
+            colorText(typeCreater(jsonCorrector(answer)), consoleColors.cyan) +
             "\n\n"
         );
         index();
       }
     }
   );
-};
-
-const correctJson = (invalidJson: string) => {
-  let correctedJSON = invalidJson.replace(/'([^']+)'(?=\s*:)/g, '"$1"');
-  correctedJSON = correctedJSON.replace(/(\w+):( |")/g, '"$1":$2');
-  correctedJSON = correctedJSON.replace(/""/g, '"');
-  // console.log(
-  //   "\n" +
-  //     colorText(
-  //       "-------------------FORMATTED-JSON-------------------",
-  //       consoleColors.BGwhite
-  //     ) +
-  //     "\n" +
-  //     colorText(correctedJSON, consoleColors.yellow)
-  // );
-  return correctedJSON;
 };
 
 index();
