@@ -7,7 +7,7 @@ const jsonCorrector = (invalidJson: string) => {
   correctedJSON = correctedJSON.replace(/(\w+):( |"|')/g, '"$1":$2');
   // Single to double quotes
   //TODO the first quotes not working
-  correctedJSON = correctedJSON.replace(/(?<=:\[\s*)'/g, '"');
+  correctedJSON = correctedJSON.replace(/(":\s*\[?)'/g, '$1"');
   correctedJSON = correctedJSON.replace(/'(?!\d|[\w\s])/g, '"');
   // Removing repeated single quotes
   correctedJSON = correctedJSON.replace(/''/g, `'`);
