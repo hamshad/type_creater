@@ -16,15 +16,15 @@ const jsonCorrector = (invalidJson: string) => {
   // Removing extra commas
   correctedJSON = correctedJSON.replace(/,\s*([\]}])/g, " $1");
 
-  console.log(
-    "\n" +
-      colorText(
-        "-------------------FORMATTED-JSON-------------------",
-        consoleColors.BGwhite
-      ) +
-      "\n" +
-      colorText(correctedJSON, consoleColors.yellow)
-  );
+  // console.log(
+  //   "\n" +
+  //     colorText(
+  //       "-------------------FORMATTED-JSON-------------------",
+  //       consoleColors.BGwhite
+  //     ) +
+  //     "\n" +
+  //     colorText(correctedJSON, consoleColors.yellow)
+  // );
 
   return correctedJSON;
 };

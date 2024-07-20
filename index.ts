@@ -25,26 +25,59 @@ rl.addListener("close", () =>
   console.log(colorText("\n👋 Have a good day~", consoleColors.blue))
 );
 
+rl.addListener("resume", () =>
+  console.log(colorText("Enter JSON:", consoleColors.yellow))
+);
+
 export const index = () => {
-  rl.question(
-    colorText("Enter JSON:", consoleColors.yellow) + "\n",
-    (answer) => {
-      if (answer === "exit" || answer === "") rl.close();
-      else {
-        console.log(
-          "\n" +
-            colorText(
-              "----------------------RESULT----------------------",
-              consoleColors.BGcyan
-            ) +
-            "\n" +
-            colorText(typeCreater(jsonCorrector(answer)), consoleColors.cyan) +
-            "\n\n"
-        );
-        index();
-      }
-    }
-  );
+  // [ SINGLE LINE INPUT ]
+  // rl.question(
+  //   colorText("Enter JSON:", consoleColors.yellow) + "\n",
+  //   (answer) => {
+  //     if (answer === "exit" || answer === "") rl.close();
+  //     else {
+  //       console.log(
+  //         "\n" +
+  //           colorText(
+  //             "----------------------RESULT----------------------",
+  //             consoleColors.BGcyan
+  //           ) +
+  //           "\n" +
+  //           colorText(typeCreater(jsonCorrector(answer)), consoleColors.cyan) +
+  //           "\n\n"
+  //       );
+  //       index();
+  //     }
+  //   }
+  // );
+
+  // [ MULTI LINE INPUT ]
+  var input_json = "";
+
+  console.log(colorText("Enter JSON:", consoleColors.yellow));
+
+  rl.on("line", (line) => {
+    if (input_json === "exit") rl.close();
+    if (line.trim() === "") {
+      main();
+      input_json = "";
+    } else input_json += " " + line.trim();
+  });
+
+  const main = () => {
+    rl.pause();
+    console.log(
+      "\n" +
+        colorText(
+          "----------------------RESULT----------------------",
+          consoleColors.BGcyan
+        ) +
+        "\n" +
+        colorText(typeCreater(jsonCorrector(input_json)), consoleColors.cyan) +
+        "\n\n"
+    );
+    rl.resume();
+  };
 };
 
 index();
