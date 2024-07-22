@@ -6,8 +6,10 @@ const jsonCorrector = (invalidJson: string) => {
   // Adding quotes around keys
   correctedJSON = correctedJSON.replace(/(\w+):( |"|')/g, '"$1":$2');
   // Single to double quotes
-  correctedJSON = correctedJSON.replace(/("[:,]\s*\[*)'/g, '$1"');
+  // end quote
   correctedJSON = correctedJSON.replace(/'(?!\d|[\w\s])/g, '"');
+  // start quote
+  correctedJSON = correctedJSON.replace(/("[:,]\s*\[*)'/g, '$1"');
   // Removing repeated single quotes
   correctedJSON = correctedJSON.replace(/''/g, `'`);
   // Removing repeated double quotes
