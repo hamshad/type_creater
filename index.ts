@@ -57,7 +57,6 @@ export const index = () => {
   console.log(colorText("Enter JSON:", consoleColors.yellow));
 
   rl.on("line", (line) => {
-    if (input_json === "exit") rl.close();
     if (line.trim() === "") {
       main();
       input_json = "";
@@ -66,17 +65,20 @@ export const index = () => {
 
   const main = () => {
     rl.pause();
-    console.log(
-      "\n" +
-        colorText(
-          "----------------------RESULT----------------------",
-          consoleColors.BGcyan
-        ) +
-        "\n" +
-        colorText(typeCreater(jsonCorrector(input_json)), consoleColors.cyan) +
-        "\n\n"
-    );
-    rl.resume();
+    if (input_json.trim() === "exit" || input_json.trim() === "") rl.close();
+      else {
+        console.log(
+          "\n" +
+            colorText(
+              "----------------------RESULT----------------------",
+              consoleColors.BGcyan
+            ) +
+            "\n" +
+            colorText(typeCreater(jsonCorrector(input_json)), consoleColors.cyan) +
+            "\n\n"
+        );
+        rl.resume();
+      }
   };
 };
 

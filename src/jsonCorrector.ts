@@ -6,8 +6,7 @@ const jsonCorrector = (invalidJson: string) => {
   // Adding quotes around keys
   correctedJSON = correctedJSON.replace(/(\w+):( |"|')/g, '"$1":$2');
   // Single to double quotes
-  //TODO the first quotes not working
-  correctedJSON = correctedJSON.replace(/(":\s*\[?)'/g, '$1"');
+  correctedJSON = correctedJSON.replace(/("[:,]\s*\[*)'/g, '$1"');
   correctedJSON = correctedJSON.replace(/'(?!\d|[\w\s])/g, '"');
   // Removing repeated single quotes
   correctedJSON = correctedJSON.replace(/''/g, `'`);
@@ -16,15 +15,15 @@ const jsonCorrector = (invalidJson: string) => {
   // Removing extra commas
   correctedJSON = correctedJSON.replace(/,\s*([\]}])/g, " $1");
 
-  // console.log(
-  //   "\n" +
-  //     colorText(
-  //       "-------------------FORMATTED-JSON-------------------",
-  //       consoleColors.BGwhite
-  //     ) +
-  //     "\n" +
-  //     colorText(correctedJSON, consoleColors.yellow)
-  // );
+  console.log(
+    "\n" +
+      colorText(
+        "-------------------FORMATTED-JSON-------------------",
+        consoleColors.BGwhite
+      ) +
+      "\n" +
+      colorText(correctedJSON, consoleColors.yellow)
+  );
 
   return correctedJSON;
 };
