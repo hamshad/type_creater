@@ -4,82 +4,96 @@ import jsonCorrector from "./src/jsonCorrector";
 import typeCreater from "./src/typeCreater";
 
 let rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
+	input: process.stdin,
+	output: process.stdout,
 });
 
 const logo: any =
-  "\n" +
-  "  _                                         _            \n" +
-  " | |                                       | |           \n" +
-  " | |_ _   _ _ __   ___   ___ _ __ ___  __ _| |_ ___ _ __ \n" +
-  " | __| | | | '_ \\ / _ \\ / __| '__/ _ \\/ _` | __/ _ \\ '__|\n" +
-  " | |_| |_| | |_) |  __/| (__| | |  __/ (_| | ||  __/ |   \n" +
-  "  \\__|\\__, | .__/ \\___| \\___|_|  \\___|\\__,_|\\__\\___|_|   \n" +
-  "       __/ | |      ______                               \n" +
-  "      |___/|_|     |______|                              \n\n";
+	"\n" +
+	"  _                                         _            \n" +
+	" | |                                       | |           \n" +
+	" | |_ _   _ _ __   ___   ___ _ __ ___  __ _| |_ ___ _ __ \n" +
+	" | __| | | | '_ \\ / _ \\ / __| '__/ _ \\/ _` | __/ _ \\ '__|\n" +
+	" | |_| |_| | |_) |  __/| (__| | |  __/ (_| | ||  __/ |   \n" +
+	"  \\__|\\__, | .__/ \\___| \\___|_|  \\___|\\__,_|\\__\\___|_|   \n" +
+	"       __/ | |      ______                               \n" +
+	"      |___/|_|     |______|                              \n\n";
 
 console.log(colorText(logo, consoleColors.blue));
 
 rl.addListener("close", () =>
-  console.log(colorText("\n👋 Have a good day~", consoleColors.blue))
+	console.log(colorText("\n👋 Have a good day~", consoleColors.blue))
 );
 
 rl.addListener("resume", () =>
-  console.log(colorText("Enter JSON:", consoleColors.yellow))
+	console.log(colorText("Enter JSON:", consoleColors.yellow))
 );
 
 export const index = () => {
-  // [ SINGLE LINE INPUT ]
-  // rl.question(
-  //   colorText("Enter JSON:", consoleColors.yellow) + "\n",
-  //   (answer) => {
-  //     if (answer === "exit" || answer === "") rl.close();
-  //     else {
-  //       console.log(
-  //         "\n" +
-  //           colorText(
-  //             "----------------------RESULT----------------------",
-  //             consoleColors.BGcyan
-  //           ) +
-  //           "\n" +
-  //           colorText(typeCreater(jsonCorrector(answer)), consoleColors.cyan) +
-  //           "\n\n"
-  //       );
-  //       index();
-  //     }
-  //   }
-  // );
+	// [ SINGLE LINE INPUT ]
+	// rl.question(
+	//   colorText("Enter JSON:", consoleColors.yellow) + "\n",
+	//   (answer) => {
+	//     if (answer === "exit" || answer === "") rl.close();
+	//     else {
+	//       console.log(
+	//         "\n" +
+	//           colorText(
+	//             "----------------------RESULT----------------------",
+	//             consoleColors.BGcyan
+	//           ) +
+	//           "\n" +
+	//           colorText(typeCreater(jsonCorrector(answer)), consoleColors.cyan) +
+	//           "\n\n"
+	//       );
+	//       index();
+	//     }
+	//   }
+	// );
 
-  // [ MULTI LINE INPUT ]
-  var input_json = "";
+	// [ MULTI LINE INPUT ]
+	var input_json = "";
 
-  console.log(colorText("Enter JSON:", consoleColors.yellow));
+	console.log(colorText("Enter JSON:", consoleColors.yellow));
 
-  rl.on("line", (line) => {
-    if (line.trim() === "") {
-      main();
-      input_json = "";
-    } else input_json += " " + line.trim();
-  });
+	rl.on("line", (line) => {
+		if (line.trim() === "") {
+			main();
+			input_json = "";
+		} else input_json += " " + line.trim();
+	});
 
-  const main = () => {
-    rl.pause();
-    if (input_json.trim() === "exit" || input_json.trim() === "") rl.close();
-      else {
-        console.log(
-          "\n" +
-            colorText(
-              "----------------------RESULT----------------------",
-              consoleColors.BGcyan
-            ) +
-            "\n" +
-            colorText(typeCreater(jsonCorrector(input_json)), consoleColors.cyan) +
-            "\n\n"
-        );
-        rl.resume();
-      }
-  };
+	const main = () => {
+		rl.pause();
+		if (input_json.trim() === "exit" || input_json.trim() === "") rl.close();
+		else {
+			try {
+				JSON.parse(input_json);
+				console.log(
+					"\n" +
+					colorText(
+						"----------------------RESULT----------------------",
+						consoleColors.BGcyan
+					) +
+					"\n" +
+					colorText(typeCreater(input_json), consoleColors.cyan) +
+					"\n\n"
+				);
+			} catch (err) {
+				console.log(
+					"\n" +
+					colorText(
+						"----------------------RESULT----------------------",
+						consoleColors.BGcyan
+					) +
+					"\n" +
+					colorText(typeCreater(jsonCorrector(input_json)), consoleColors.cyan) +
+					"\n\n"
+				);
+				rl.resume();
+			}
+		}
+	};
 };
 
 index();
