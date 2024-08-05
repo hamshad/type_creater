@@ -26,7 +26,7 @@ yarn start
 
 ## Step 4: Enter your JSON in single line
 
-Enter your JSON file in single line (the terminal will give you option to paste as single line or multiple)
+Enter your JSON data and press enter
 
 ## TADA! :tada:
 
