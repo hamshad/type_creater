@@ -9,7 +9,8 @@ const typeCreater = (data: any) => {
       ? obj2type(json_data)
       : typeParser(data);
   } catch (err) {
-    if (RegExp(/[{}\[\]:]/).test(data)) {
+	  const isJsonRegex =/[{}\[\]:]/; 
+    if (RegExp(isJsonRegex).test(data)) {
       console.log(
         colorText("\n[ERROR]", consoleColors.BGred),
         colorText("" + err, consoleColors.red)
