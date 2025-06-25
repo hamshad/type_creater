@@ -1,5 +1,16 @@
 # type_creater
 
+```
+  _                                         _            
+ | |                                       | |           
+ | |_ _   _ _ __   ___   ___ _ __ ___  __ _| |_ ___ _ __ 
+ | __| | | | '_ \ / _ \ / __| '__/ _ \/ _` | __/ _ \ '__/
+ | |_| |_| | |_) |  __/| (__| | |  __/ (_| | ||  __/ |   
+  \__|\__, | .__/ \___| \___|_|  \___|\__,_|\__\___|_|   
+       __/ | |      ______                               
+      |___/|_|     |______|                              
+```
+
 **type_creater** is a command-line tool that takes your JSON input and instantly generates the corresponding TypeScript type definition. It accepts both single-line and multi-line JSON input, automatically corrects common formatting issues, and displays the generated type in a clear, readable format.
 
 ## Features
