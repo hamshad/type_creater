@@ -1,33 +1,91 @@
-## Step 1: Clone the Repository
+# type_creater
+
+**type_creater** is a command-line tool that takes your JSON input and instantly generates the corresponding TypeScript type definition. It accepts both single-line and multi-line JSON input, automatically corrects common formatting issues, and displays the generated type in a clear, readable format.
+
+## Features
+
+- **Automatic Type Generation**: Converts any valid JSON into a TypeScript type definition.
+- **Error Tolerance**: Attempts to auto-correct malformed JSON (e.g., missing quotes, trailing commas).
+- **Supports Complex Structures**: Handles nested objects, arrays, and various primitive types.
+- **Colorful CLI Output**: Uses colored console output for better readability.
+- **Simple Usage**: Paste or type your JSON, press Enter, and see the result.
+- **Exit Anytime**: Type `exit` or submit an empty line to quit.
+- **Tested**: Includes Jest tests for robust behavior.
+
+## Getting Started
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/hamshad/type_creater
+cd type_creater
 ```
 
-## Step 2: Install Dependencies
+### 2. Install Dependencies
 
+Using npm:
 ```bash
-# using npm
-npm i
+npm install
+```
 
-# OR using Yarn
+Or using Yarn:
+```bash
 yarn
 ```
 
-## Step 3: Run the type_creater
+### 3. Run the Tool
 
+Using npm:
 ```bash
-# using npm
 npm start
+```
 
-# OR using Yarn
+Or using Yarn:
+```bash
 yarn start
 ```
 
-## Step 4: Enter your JSON in single line
+### 4. Enter Your JSON
 
-Enter your JSON data and press enter
+- Paste or type your JSON data and press Enter.
+- Multi-line input is supported: keep entering lines, and an empty line triggers the type generation.
+- If your JSON is not properly formatted (e.g., uses single quotes, missing quotes on keys), the tool will try to fix it.
 
-## TADA! :tada:
+### 5. See the Type
 
-You got type of your JSON
+- The generated TypeScript type is printed in the console.
+- To exit, type `exit` or press Enter on an empty prompt.
+
+## Example
+
+```
+Enter JSON:
+{"name":"John","age":30,"address":{"city":"NY"}}
+
+----------------------RESULT----------------------
+{
+  name: string;
+  age: number;
+  address: {
+    city: string;
+    [key: string]: any;
+  };
+  [key: string]: any;
+}
+```
+
+## Running Tests
+
+This project uses [Jest](https://jestjs.io/) for testing.
+
+```bash
+npm test
+```
+or
+```bash
+yarn test
+```
+
+## License
+
+MIT
